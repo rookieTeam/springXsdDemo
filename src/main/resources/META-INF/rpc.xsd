@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xmlns:beans="http://www.springframework.org/schema/beans"
+xmlns:tool="http://www.springframework.org/schema/tool"
+targetNamespace="http://www.example.org/rpc" xmlns:tns="http://www.example.org/rpc" elementFormDefault="qualified">
+    
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+	<xsd:import namespace="http://www.springframework.org/schema/beans" />
+	<xsd:import namespace="http://www.springframework.org/schema/tool" />
+	
+   <xsd:element name= "client">
+        <xsd:complexType>
+        <xsd:complexContent>
+          <xsd:extension base="beans:identifiedType">
+            <xsd:attribute name="interface" type="xsd:token" use="required">
+               <xsd:annotation>
+                 <xsd:documentation><![CDATA[The servic interface class nam.]]></xsd:documentation>
+                 <xsd:appinfo>
+                    <tool:annotation>
+                       <tool:expected-type type="java.Lang.Class" />
+                    </tool:annotation>
+                 </xsd:appinfo>
+               </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="host" type="xsd:string" use="optional">
+               <xsd:annotation>
+                  <xsd:documentation><![CDATA[ The service host.]]></xsd:documentation>
+               </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="port" type="xsd:string" use="optional">
+               <xsd:annotation>
+                  <xsd:documentation><![CDATA[ The service port.]]></xsd:documentation>
+               </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="timeout" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ The connect and read wait timeout in seconds. ]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="async" type="xsd:boolean" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ Whether the client call is asynchronous. ]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="type" type="xsd:string" use="required">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ The message type. ]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="seqInherit" type="xsd:boolean" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ Whether the client use original sequence number. ]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="receipt" type="xsd:boolean" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ Whether the client need receipt. ]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="client" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ The client used to send message. ]]></xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="netty"></xsd:enumeration>
+						<xsd:enumeration value="socket"></xsd:enumeration>
+						<xsd:enumeration value="http"></xsd:enumeration>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="serialization" use="optional">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[ The serializer used to serilize the message. ]]></xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="java"></xsd:enumeration>
+						<xsd:enumeration value="json"></xsd:enumeration>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:element>
+   
+   <xsd:element name="service">
+		
+        <xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="beans:identifiedType">
+					<xsd:attribute name="host" type="xsd:string" use="optional">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[ The service host. ]]></xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="port" type="xsd:string" use="optional">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[ The service port. ]]></xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="async" type="xsd:boolean" use="optional">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[ Whether the service call is asynchronous. ]]></xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="type" type="xsd:string" use="required">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[ The message type. ]]></xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="interface" type="xsd:token" use="optional">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[ The service interface class name. ]]></xsd:documentation>
+							<xsd:appinfo>
+								<tool:annotation>
+									<tool:expected-type type="java.lang.Class" />
+								</tool:annotation>
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="implemention" type="xsd:token" use="optional">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[ The service implementation class name. ]]></xsd:documentation>
+							<xsd:appinfo>
+								<tool:annotation>
+									<tool:expected-type type="java.lang.Class" />
+								</tool:annotation>
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="ref" type="xsd:string" use="optional">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[ The service implementation instance bean id. ]]></xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="receipt" type="xsd:boolean" use="optional">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[ Whether the client need receipt. ]]></xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="server" use="optional">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[ The server used to receive message. ]]></xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="netty"></xsd:enumeration>
+								<xsd:enumeration value="socket"></xsd:enumeration>
+								<xsd:enumeration value="http"></xsd:enumeration>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+					<xsd:attribute name="serialization" use="optional">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[ The serializer used to serilize the message. ]]></xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="java"></xsd:enumeration>
+								<xsd:enumeration value="json"></xsd:enumeration>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+    </xsd:element>
+</xsd:schema>

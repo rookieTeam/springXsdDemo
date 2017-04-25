@@ -5,21 +5,20 @@
 	     xmlns:jee="http://www.springframework.org/schema/jee"
 	     xmlns:tx="http://www.springframework.org/schema/tx"
 	     xmlns:context="http://www.springframework.org/schema/context"
-	     xmlns:test="http://www.cnblogs.com/eric-lin/schema/user"
+	     xmlns:rpc="http://www.example.org/rpc"
 	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
-			http://www.cnblogs.com/eric-lin/schema/user 
-            http://www.cnblogs.com/eric-lin/schema/user/user.xsd">
+            http://www.example.org/rpc
+            http://www.example.org/rpc/rpc.xsd">
 	 <!-- 使用annotation 自动注册bean,并保证@Required,@Autowired的属性被注入 -->
 	<context:component-scan base-package="com.xsd.demo"/>
 	<!-- <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
         <property name="properties" ref="baseProperties" />
     </bean> -->
-	  <test:user id="eric" name="123" sex="male" age="28" />
-
+      <rpc:client id="kbmIndexClient" type="ZZ01" interface="com.xsd.service.TimeClientService" timeout="30" async="true" port="8801"/>
 	 
 	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
 	<!-- <bean

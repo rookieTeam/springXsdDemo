@@ -1,1 +1,1 @@
-http\://www.cnblogs.com/eric-lin/schema/user=com.xsd.handler.NamespaceHandler
+http\://www.example.org/rpc=com.xsd.handler.NamespaceHandler
